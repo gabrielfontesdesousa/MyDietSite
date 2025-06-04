@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+  <title>Plano de Dieta Personalizado</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="dashboard.css">
+</head>
+<body>
+  <header>
+    <h1>Plano Alimentar Personalizado</h1>
+    <p><strong>Objetivo:</strong> Secar primeiro, depois ganhar músculo (estética corporal)</p>
+    <p><strong>Calorias alvo:</strong> 2100-2200 kcal/dia</p>
+    <p><strong>Macros aproximados:</strong> Proteína: 150-160g, Carboidrato: 180-200g, Gordura: 70-75g</p>
+  </header>
+
+  <main>
+    <section id="diet-plan">
+      <h2>Plano Diário</h2>
+
+      <!-- Café da Manhã -->
+      <article class="meal" id="refeicao-cafe">
+        <h3>Café da Manhã (07:00 - 09:00)</h3>
+        <p>Base: leite + leite em pó + banana + pasta de amendoim/cacau</p>
+        <ul>
+          <li>
+            <label>
+              <input type="checkbox" name="meal" data-cal="350" value="Vitamina leite + banana + pasta amendoim" />
+              300ml leite + 30g leite em pó + 1 banana + 10g pasta de amendoim ou cacau (350 kcal)
+            </label>
+          </li>
+          <li>
+            <label>
+              <input type="checkbox" name="meal" data-cal="400" value="Vitamina + iogurte proteico" />
+              Opção com iogurte proteico para mais proteína (+50 kcal) (400 kcal)
+            </label>
+          </li>
+        </ul>
+      </article>
+
+      <!-- Lanche da Manhã -->
+      <article class="meal" id="refeicao-lanche-manha">
+        <h3>Lanche da Manhã (na escola)</h3>
+        <p>Pão + hambúrguer caseiro + queijo</p>
+        <ul>
+          <li>
+            <label>
+              <input type="checkbox" name="meal" data-cal="550" value="Lanche manha sanduiche" />
+              Pão francês/integral + hambúrguer caseiro (120-150g) + 1 fatia queijo (550 kcal)
+            </label>
+          </li>
+        </ul>
+      </article>
+
+      <!-- Almoço -->
+      <article class="meal" id="refeicao-almoco">
+        <h3>Almoço (14:30 - 15:00, pós-treino)</h3>
+        <p>150-200g proteína + arroz + feijão opcional + salada + azeite</p>
+        <ul>
+          <li>
+            <label>
+              <input type="checkbox" name="meal" data-cal="750" value="Almoço padrão" />
+              150-200g carne/frango/peixe + 120-150g arroz + 1 concha feijão + salada + azeite (750 kcal)
+            </label>
+          </li>
+        </ul>
+      </article>
+
+      <!-- Lanche da Tarde -->
+      <article class="meal" id="refeicao-lanche-tarde">
+        <h3>Lanche da Tarde (Opcional)</h3>
+        <p>Escolha entre iogurte proteico + fruta + castanhas, shake ou sanduíche</p>
+        <ul>
+          <li>
+            <label>
+              <input type="checkbox" name="meal" data-cal="350" value="Lanche tarde iogurte + fruta + castanhas" />
+              Iogurte proteico + fruta + 10g castanha/amendoim (350 kcal)
+            </label>
+          </li>
+          <li>
+            <label>
+              <input type="checkbox" name="meal" data-cal="350" value="Lanche tarde shake" />
+              Shake similar ao café da manhã (350 kcal)
+            </label>
+          </li>
+          <li>
+            <label>
+              <input type="checkbox" name="meal" data-cal="450" value="Lanche tarde sanduiche" />
+              Sanduíche com hambúrguer e complementos (450 kcal)
+            </label>
+          </li>
+        </ul>
+      </article>
+
+      <!-- Jantar -->
+      <article class="meal" id="refeicao-jantar">
+        <h3>Jantar (19:00 - 20:00)</h3>
+        <p>Semelhante ao almoço, pode variar proteína/preparações</p>
+        <ul>
+          <li>
+            <label>
+              <input type="checkbox" name="meal" data-cal="750" value="Jantar padrão" />
+              150-200g carne/frango/peixe + 120-150g arroz + salada + azeite (750 kcal)
+            </label>
+          </li>
+        </ul>
+      </article>
+
+      <!-- Ceia -->
+      <article class="meal" id="refeicao-ceia">
+        <h3>Ceia (Opcional)</h3>
+        <p>200ml leite + leite em pó, iogurte proteico ou queijo</p>
+        <ul>
+          <li>
+            <label>
+              <input type="checkbox" name="meal" data-cal="200" value="Ceia leite + leite em pó" />
+              200ml leite + 30g leite em pó (200 kcal)
+            </label>
+          </li>
+          <li>
+            <label>
+              <input type="checkbox" name="meal" data-cal="150" value="Ceia iogurte proteico" />
+              Iogurte proteico (150 kcal)
+            </label>
+          </li>
+          <li>
+            <label>
+              <input type="checkbox" name="meal" data-cal="220" value="Ceia queijo minas/muçarela" />
+              100g queijo minas/muçarela (220 kcal)
+            </label>
+          </li>
+        </ul>
+      </article>
+    </section>
+
+    <section id="water-intake">
+      <h2>Hidratação</h2>
+      <p>Meta diária: 4 garrafas de 500ml (2 litros)</p>
+      <div style="display: flex; flex-direction: column;">
+        <label><input type="checkbox" name="water" value="500" /> Garrafa 1 (500 ml)</label>
+        <label><input type="checkbox" name="water" value="500" /> Garrafa 2 (500 ml)</label>
+        <label><input type="checkbox" name="water" value="500" /> Garrafa 3 (500 ml)</label>
+        <label><input type="checkbox" name="water" value="500" /> Garrafa 4 (500 ml)</label>
+        <label><input type="checkbox" name="water" value="500" /> Garrafa 5 (500 ml)</label>
+
+      </div>
+    </section>
+
+    <section id="summary">
+      <h2>Resumo do Dia</h2>
+      <p>Calorias totais marcadas: <span id="total-calories">0</span> kcal</p>
+      <p>Água ingerida: <span id="total-water">0</span> ml</p>
+    </section>
+
+    <section id="dashboard">
+      <h2>Resumo Semanal (em desenvolvimento)</h2>
+      <p>Dias com dieta cumprida: <span id="days-adhered">0</span>/7</p>
+      <p>Consumo médio de água por dia: <span id="water-average">0</span> ml</p>
+      <a href="dashboard.html" class="btn-dashboard">Abrir Dashboard</a>
+
+    </section>
+
+  <h1>Registro de Peso e Fotos de Progresso</h1>
+
+  <form id="progress-form">
+    <label for="date">Data:</label>
+    <input type="date" id="date" required />
+    <br /><br />
+
+    <label for="weight">Peso (kg):</label>
+    <input type="number" id="weight" step="0.1" min="0" required />
+    <br /><br />
+
+    <label for="photo">Foto de Progresso:  <br><br></label>
+    <label for="photo" class="custom-file-label">  Enviar Foto</label>
+    <input type="file" id="photo" accept="image/*" />
+    <span id="file-name">Nenhum arquivo selecionado</span>
+        <br /><br />
+
+    <button type="submit">Adicionar Registro</button>
+  </form>
+
+  <h2>Registros</h2>
+  <div id="records-container"></div>
+
+  <!-- Modal para ampliar a foto -->
+  <div id="modal" onclick="this.classList.remove('show')">
+    <img id="modal-img" src="" alt="Foto ampliada" />
+  </div>
+
+    <button id="reset-btn">Resetar Plano</button>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
