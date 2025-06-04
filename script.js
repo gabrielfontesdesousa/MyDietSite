@@ -1,22 +1,21 @@
-
 const mealCheckboxes = document.querySelectorAll('input[name="meal"]');
 const waterCheckboxes = document.querySelectorAll('input[name="water"]');
-const totalCaloriesSpan = document.getElementById('total-calories');
-const totalWaterSpan = document.getElementById('total-water');
+const totalCaloriesSpan = document.getElementById("total-calories");
+const totalWaterSpan = document.getElementById("total-water");
 
-mealCheckboxes.forEach(cb => {
-  cb.addEventListener('change', updateCalories);
+mealCheckboxes.forEach((cb) => {
+  cb.addEventListener("change", updateCalories);
 });
 
-waterCheckboxes.forEach(cb => {
-  cb.addEventListener('change', updateWater);
+waterCheckboxes.forEach((cb) => {
+  cb.addEventListener("change", updateWater);
 });
 
 function updateCalories() {
   let total = 0;
-  mealCheckboxes.forEach(cb => {
+  mealCheckboxes.forEach((cb) => {
     if (cb.checked) {
-      total += parseInt(cb.getAttribute('data-cal')) || 0;
+      total += parseInt(cb.getAttribute("data-cal")) || 0;
     }
   });
   totalCaloriesSpan.textContent = total;
@@ -24,7 +23,7 @@ function updateCalories() {
 
 function updateWater() {
   let total = 0;
-  waterCheckboxes.forEach(cb => {
+  waterCheckboxes.forEach((cb) => {
     if (cb.checked) {
       total += parseInt(cb.value) || 0;
     }
@@ -32,23 +31,22 @@ function updateWater() {
   totalWaterSpan.textContent = total;
 }
 
+const progressForm = document.getElementById("progress-form");
+const recordsContainer = document.getElementById("records-container");
 
-const progressForm = document.getElementById('progress-form');
-const recordsContainer = document.getElementById('records-container');
-
-let records = JSON.parse(localStorage.getItem('progressRecords')) || [];
+let records = JSON.parse(localStorage.getItem("progressRecords")) || [];
 
 renderRecords();
 
-progressForm.addEventListener('submit', (e) => {
+progressForm.addEventListener("submit", (e) => {
   e.preventDefault();
 
-  const date = document.getElementById('date').value;
-  const weight = parseFloat(document.getElementById('weight').value);
-  const photoFile = document.getElementById('photo').files[0];
+  const date = document.getElementById("date").value;
+  const weight = parseFloat(document.getElementById("weight").value);
+  const photoFile = document.getElementById("photo").files[0];
 
   if (!photoFile) {
-    alert('Por favor, selecione uma foto.');
+    alert("Por favor, selecione uma foto.");
     return;
   }
 
@@ -59,7 +57,7 @@ progressForm.addEventListener('submit', (e) => {
     const newRecord = { date, weight, photo: photoUrl };
     records.push(newRecord);
 
-    localStorage.setItem('progressRecords', JSON.stringify(records));
+    localStorage.setItem("progressRecords", JSON.stringify(records));
 
     renderRecords();
     progressForm.reset();
@@ -69,73 +67,84 @@ progressForm.addEventListener('submit', (e) => {
 });
 
 function renderRecords() {
-  recordsContainer.innerHTML = '';
+  recordsContainer.innerHTML = "";
 
   if (records.length === 0) {
-    recordsContainer.innerHTML = '<p>Nenhum registro até agora.</p>';
+    recordsContainer.innerHTML = "<p>Nenhum registro até agora.</p>";
     return;
   }
 
   records.forEach((record, index) => {
-    const div = document.createElement('div');
-    div.classList.add('record');
+    const div = document.createElement("div");
+    div.classList.add("record");
     div.innerHTML = `
       <p><strong>Data:</strong> ${record.date}</p>
       <p><strong>Peso:</strong> ${record.weight} kg</p>
       <img src="${record.photo}" alt="Progresso ${record.date}" class="thumbnail" data-index="${index}">
+      <button class="remove-btn">Remover</button>
       <hr/>
     `;
-    recordsContainer.appendChild(div);
-  });
 
-  const thumbnails = document.querySelectorAll('.thumbnail');
-  thumbnails.forEach(img => {
-    img.addEventListener('click', (e) => {
+    // Abrir foto no modal
+    div.querySelector("img").addEventListener("click", (e) => {
       const src = e.target.src;
       showModal(src);
     });
+
+    // Remover registro
+    div.querySelector(".remove-btn").addEventListener("click", () => {
+      records.splice(index, 1);
+      localStorage.setItem("progressRecords", JSON.stringify(records));
+      renderRecords();
+    });
+
+    recordsContainer.appendChild(div);
   });
 }
 
-
-const modal = document.getElementById('modal');
-const modalImg = document.getElementById('modal-img');
+const modal = document.getElementById("modal");
+const modalImg = document.getElementById("modal-img");
 
 function showModal(src) {
   modalImg.src = src;
-  modal.classList.add('show');
+  modal.classList.add("show");
 }
 
-modal.addEventListener('click', () => {
-  modal.classList.remove('show');
+modal.addEventListener("click", () => {
+  modal.classList.remove("show");
 });
 
+const resetBtn = document.getElementById("reset-btn");
 
-const resetBtn = document.getElementById('reset-btn');
-
-resetBtn.addEventListener('click', () => {
-  if (confirm('Deseja realmente resetar tudo? Isso apagará os registros e desmarcará tudo.')) {
-    mealCheckboxes.forEach(cb => cb.checked = false);
-    waterCheckboxes.forEach(cb => cb.checked = false);
+resetBtn.addEventListener("click", () => {
+  if (
+    confirm(
+      "Deseja realmente resetar tudo? Isso apagará os registros e desmarcará tudo."
+    )
+  ) {
+    mealCheckboxes.forEach((cb) => (cb.checked = false));
+    waterCheckboxes.forEach((cb) => (cb.checked = false));
     updateCalories();
     updateWater();
 
     records = [];
-    localStorage.removeItem('progressRecords');
+    localStorage.removeItem("progressRecords");
     renderRecords();
   }
 });
-document.querySelectorAll('article.meal').forEach(meal => {
-    const checkboxes = meal.querySelectorAll('input[type="checkbox"]');
 
-    checkboxes.forEach(checkbox => {
-      checkbox.addEventListener('change', () => {
-        if (checkbox.checked) {
-          checkboxes.forEach(cb => {
-            if (cb !== checkbox) cb.checked = false;
-          });
-        }
-        updateCalories();
-      });
+// ✅ Bloquear múltiplas escolhas na mesma refeição
+document.querySelectorAll("article.meal").forEach((meal) => {
+  const checkboxes = meal.querySelectorAll('input[type="checkbox"]');
+
+  checkboxes.forEach((checkbox) => {
+    checkbox.addEventListener("change", () => {
+      if (checkbox.checked) {
+        checkboxes.forEach((cb) => {
+          if (cb !== checkbox) cb.checked = false;
+        });
+      }
+      updateCalories();
     });
   });
+});
