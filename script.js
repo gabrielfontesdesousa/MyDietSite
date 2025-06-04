@@ -3,12 +3,25 @@ const waterCheckboxes = document.querySelectorAll('input[name="water"]');
 const totalCaloriesSpan = document.getElementById("total-calories");
 const totalWaterSpan = document.getElementById("total-water");
 
+// Carregar estado dos checkboxes ao iniciar
+window.addEventListener("load", () => {
+  loadCheckboxState();
+  updateCalories();
+  updateWater();
+});
+
 mealCheckboxes.forEach((cb) => {
-  cb.addEventListener("change", updateCalories);
+  cb.addEventListener("change", () => {
+    updateCalories();
+    saveCheckboxState();
+  });
 });
 
 waterCheckboxes.forEach((cb) => {
-  cb.addEventListener("change", updateWater);
+  cb.addEventListener("change", () => {
+    updateWater();
+    saveCheckboxState();
+  });
 });
 
 function updateCalories() {
@@ -31,6 +44,33 @@ function updateWater() {
   totalWaterSpan.textContent = total;
 }
 
+// ✅ Função para salvar estado dos checkboxes no localStorage
+function saveCheckboxState() {
+  const mealState = Array.from(mealCheckboxes).map(cb => cb.checked);
+  const waterState = Array.from(waterCheckboxes).map(cb => cb.checked);
+  localStorage.setItem("mealCheckboxState", JSON.stringify(mealState));
+  localStorage.setItem("waterCheckboxState", JSON.stringify(waterState));
+}
+
+// ✅ Função para carregar estado dos checkboxes do localStorage
+function loadCheckboxState() {
+  const mealState = JSON.parse(localStorage.getItem("mealCheckboxState"));
+  const waterState = JSON.parse(localStorage.getItem("waterCheckboxState"));
+
+  if (mealState) {
+    mealCheckboxes.forEach((cb, index) => {
+      cb.checked = mealState[index] || false;
+    });
+  }
+
+  if (waterState) {
+    waterCheckboxes.forEach((cb, index) => {
+      cb.checked = waterState[index] || false;
+    });
+  }
+}
+
+// 📸 Parte dos registros de progresso
 const progressForm = document.getElementById("progress-form");
 const recordsContainer = document.getElementById("records-container");
 
@@ -102,6 +142,7 @@ function renderRecords() {
   });
 }
 
+// 🔍 Modal
 const modal = document.getElementById("modal");
 const modalImg = document.getElementById("modal-img");
 
@@ -114,6 +155,7 @@ modal.addEventListener("click", () => {
   modal.classList.remove("show");
 });
 
+// 🔄 Resetar tudo
 const resetBtn = document.getElementById("reset-btn");
 
 resetBtn.addEventListener("click", () => {
@@ -126,9 +168,12 @@ resetBtn.addEventListener("click", () => {
     waterCheckboxes.forEach((cb) => (cb.checked = false));
     updateCalories();
     updateWater();
+    saveCheckboxState();
 
     records = [];
     localStorage.removeItem("progressRecords");
+    localStorage.removeItem("mealCheckboxState");
+    localStorage.removeItem("waterCheckboxState");
     renderRecords();
   }
 });
@@ -145,6 +190,7 @@ document.querySelectorAll("article.meal").forEach((meal) => {
         });
       }
       updateCalories();
+      saveCheckboxState();
     });
   });
 });
