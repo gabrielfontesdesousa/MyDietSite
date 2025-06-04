@@ -7,6 +7,8 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="style.css" />
   <link rel="stylesheet" href="dashboard.css">
+  <link type="image/png" sizes="32x32" rel="icon" href="./icons8-pesagem-32.png">
+
 </head>
 <body>
   <header>
@@ -179,18 +181,17 @@
     <span id="file-name">Nenhum arquivo selecionado</span>
         <br /><br />
 
-    <button type="submit">Adicionar Registro</button>
+    <button style="font-family: 'Poppins';"  type="submit">Adicionar Registro</button>
   </form>
 
   <h2>Registros</h2>
   <div id="records-container"></div>
 
-  <!-- Modal para ampliar a foto -->
   <div id="modal" onclick="this.classList.remove('show')">
     <img id="modal-img" src="" alt="Foto ampliada" />
   </div>
 
-    <button id="reset-btn">Resetar Plano</button>
+    <button style="font-family: 'Poppins';" id="reset-btn">Resetar Plano</button>
   </main>
 
   <script src="script.js"></script>
