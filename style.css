@@ -140,6 +140,8 @@ input[type="file"] {
     padding: 0.5rem 1rem;
     border-radius: 8px;
     font-weight: 600;
+    font-family: 'Poppins';
+
   }
 
   .btn-dashboard:hover {
@@ -188,6 +190,8 @@ input[type="file"] {
     button, .btn-dashboard {
       width: 100%;
       box-sizing: border-box;
+      font-family: 'Poppins';
+
     }
   }
   .record {
@@ -222,6 +226,7 @@ input[type="file"] {
     cursor: pointer;
     transition: background-color 0.3s ease;
     margin-top: 10px;
+    font-family: 'Poppins';
   }
 
   .remove-btn:hover {
